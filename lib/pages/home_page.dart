@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pokedex/repository/pokemon_model.dart';
+import 'package:pokedex/repository/pokemon_list__model.dart';
 import 'package:pokedex/repository/pokemon_repository.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,11 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<dynamic>> pokemonList;
+  late Future<Map<String, dynamic>> pokemonList;
   @override
   void initState() {
     super.initState();
-    pokemonList = PokemonRepository().getPokemon();
+    pokemonList = PokemonRepository().getPokemonList();
   }
 
   @override
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           horizontal: 15,
           vertical: 5,
         ),
-        child: FutureBuilder<List<dynamic>>(
+        child: FutureBuilder(
           future: pokemonList,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 } else {
+                  var results = snapshot.data!['results'];
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -125,23 +126,41 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: snapshot.data!.length,
+                          itemCount: results.length,
                           itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Text(
-                                  index + 1 < 10
-                                      ? '#000${index + 1}'
-                                      : index + 1 < 99
-                                          ? '#00${index + 1}'
-                                          : index + 1 < 999
-                                              ? '#0${index + 1}'
-                                              : '#${index + 1}',
+                            return Card(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
                                 ),
-                                Text(
-                                  snapshot.data![index].name.toString(),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
                                 ),
-                              ],
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          index + 1 < 10
+                                              ? '#000${index + 1}'
+                                              : index + 1 < 99
+                                                  ? '#00${index + 1}'
+                                                  : index + 1 < 999
+                                                      ? '#0${index + 1}'
+                                                      : '#${index + 1}',
+                                        ),
+                                        Text(results[index]['name']),
+                                      ],
+                                    ),
+                                    Image.network(
+                                        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png'),
+                                  ],
+                                ),
+                              ),
                             );
                           },
                         ),
