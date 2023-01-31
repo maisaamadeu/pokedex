@@ -31,4 +31,28 @@ class PokemonRepository {
       throw ('ERRO');
     }
   }
+
+  Future<Map<String, dynamic>> getPokemonDetails({required String name}) async {
+    var url = Uri.https('pokeapi.co', 'api/v2/pokemon/${name}');
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      return jsonResponse;
+    } else {
+      throw ('ERRO');
+    }
+  }
+
+  Future<Map<String, dynamic>> getTypes({required String name}) async {
+    var url = Uri.https('pokeapi.co', 'api/v2/pokemon/${name}');
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      return jsonResponse;
+    } else {
+      throw ('ERRO');
+    }
+  }
 }
