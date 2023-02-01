@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+import 'package:pokedex/pages/home_page.dart' as HomePage;
 
 import 'package:pokedex/repository/pokemon_list__model.dart';
 
@@ -25,7 +27,6 @@ class PokemonRepository {
       // a = a.map((json) => PokemonModel.fromJson(json)).toList();
 
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-
       return jsonResponse;
     } else {
       throw ('ERRO');

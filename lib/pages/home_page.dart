@@ -1,3 +1,7 @@
+import 'dart:math';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pokedex/repository/pokemon_list__model.dart';
@@ -11,7 +15,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Color defaultColorCardPokemon = Colors.orangeAccent;
   late Future<Map<String, dynamic>> pokemonList;
+
+  List<Map<String, dynamic>> typesColors = [
+    {"type": "normal", "color": Colors.grey[300]},
+    {"type": "fighting", "color": Colors.brown},
+    {"type": "flying", "color": Colors.lightBlue},
+    {"type": "poison", "color": Colors.purple},
+    {"type": "ground", "color": Colors.deepOrange},
+    {"type": "rock", "color": Colors.brown[300]},
+    {"type": "bug", "color": Colors.lightGreen},
+    {"type": "ghost", "color": Colors.indigo},
+    {"type": "steel", "color": Colors.grey},
+    {"type": "fire", "color": Colors.red},
+    {"type": "water", "color": Colors.blue},
+    {"type": "grass", "color": Colors.green},
+    {"type": "electric", "color": Colors.yellow},
+    {"type": "psychic", "color": Colors.pink[200]},
+    {"type": "ice", "color": Colors.lightBlue[100]},
+    {"type": "dragon", "color": Colors.blue[900]},
+    {"type": "dark", "color": Colors.black54},
+    {"type": "fairy", "color": Colors.pinkAccent[100]},
+    {"type": "unknown", "color": Colors.teal},
+    {"type": "shadow", "color": Colors.grey[900]}
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -137,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              color: Colors.red,
+                              color: Colors.blueGrey[200],
                               child: SizedBox(
                                 height: 100,
                                 child: Stack(
@@ -162,6 +191,29 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
+                                    // Positioned(
+                                    //   left: 20,
+                                    //   top: 30,
+                                    //   child: Text(
+                                    //     results[index]['name']
+                                    //             .toString()
+                                    //             .split('')
+                                    //             .first
+                                    //             .toUpperCase() +
+                                    //         results[index]['name']
+                                    //             .toString()
+                                    //             .substring(1),
+                                    //     style: TextStyle(
+                                    //       fontFamily: 'sf',
+                                    //       fontSize: 24,
+                                    //       fontWeight: FontWeight.bold,
+                                    //       foreground: Paint()
+                                    //         ..style = PaintingStyle.stroke
+                                    //         ..strokeWidth = 3
+                                    //         ..color = Colors.black,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Positioned(
                                       left: 20,
                                       top: 30,
@@ -222,29 +274,55 @@ class _HomePageState extends State<HomePage> {
                                               );
                                             } else {
                                               return Positioned(
-                                                bottom: 20,
+                                                bottom: 10,
+                                                left: 20,
                                                 child: SizedBox(
-                                                  height: 10,
+                                                  height: 20,
                                                   child: ListView.builder(
                                                     shrinkWrap: true,
                                                     scrollDirection:
                                                         Axis.horizontal,
                                                     itemCount: snapshot
                                                         .data!['types'].length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return SizedBox(
-                                                        height: 50,
+                                                    itemBuilder: (context, i) {
+                                                      var types = snapshot
+                                                              .data!['types'][i]
+                                                          ['type']['name'];
+                                                      var color = Colors.red;
+                                                      for (var element
+                                                          in typesColors) {
+                                                        if (element["type"] ==
+                                                            types) {
+                                                          color =
+                                                              element['color'];
+                                                        }
+                                                      }
+                                                      return Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 5,
+                                                          vertical: 2,
+                                                        ),
+                                                        margin: EdgeInsets.only(
+                                                            right: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: color,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        3)),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.min,
                                                           children: [
                                                             Text(
-                                                              'Amgfdkl',
+                                                              types
+                                                                  .toString()
+                                                                  .toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white),
-                                                            )
+                                                            ),
                                                           ],
                                                         ),
                                                       );
