@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import 'package:pokedex/pages/home_page.dart' as HomePage;
-
-import 'package:pokedex/repository/pokemon_list__model.dart';
 
 class PokemonRepository {
   Future<Map<String, dynamic>> getPokemonList({
@@ -34,7 +30,7 @@ class PokemonRepository {
   }
 
   Future<Map<String, dynamic>> getPokemonDetails({required String name}) async {
-    var url = Uri.https('pokeapi.co', 'api/v2/pokemon/${name}');
+    var url = Uri.https('pokeapi.co', 'api/v2/pokemon/$name');
     var response = await http.get(url);
 
     if (response.statusCode == 200) {

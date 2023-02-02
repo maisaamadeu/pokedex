@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokedex/widgets/pokemon_types_widget.dart';
 
 class PokemonDetails extends StatefulWidget {
@@ -63,7 +61,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
                               ['front_default'],
                           height: 150,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Column(
@@ -104,8 +102,8 @@ class _PokemonDetailsState extends State<PokemonDetails>
                               height: 10,
                             ),
                             PokemonTypesWidget(
-                                typesColors: this.widget.typesColors,
-                                pokemonDetails: this.widget.pokemonDetails)
+                                typesColors: widget.typesColors,
+                                pokemonDetails: widget.pokemonDetails)
                           ],
                         ),
                       ],
@@ -116,7 +114,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
                     TabBar(
                       indicatorColor: Colors.transparent,
                       controller: _controller,
-                      tabs: [
+                      tabs: const [
                         Tab(
                           text: 'Sobre',
                         ),
@@ -130,7 +128,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
                     ),
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
@@ -139,7 +137,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
                         ),
                         child: TabBarView(
                           controller: _controller,
-                          children: <Widget>[
+                          children: const <Widget>[
                             Center(
                               child: Text("It's cloudy here"),
                             ),
