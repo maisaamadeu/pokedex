@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                         height: 20,
                       ),
                       Text(
-                        'Procure por um Pokemon usando um nome ou usando o número da pokédex',
+                        'Search for Pokémon by name or using the National Pokédex number.',
                         style: TextStyle(
                           fontFamily: 'sf',
                           fontSize: 18,
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          hintText: 'Qual pokemon você está procurando?',
+                          hintText: 'What Pokémon you are looking for?',
                           prefixIcon: const Icon(Icons.search),
                           filled: true,
                           fillColor: Colors.grey[250],
@@ -158,10 +158,12 @@ class _HomePageState extends State<HomePage> {
                                 PokemonRepository()
                                     .getPokemonDetails(name: name);
                             return PokemonCardWidget(
-                                index: index,
-                                results: results,
-                                pokemonDetails: pokemonDetails,
-                                typesColors: typesColors);
+                              index: index,
+                              results: results,
+                              pokemonDetails: pokemonDetails,
+                              typesColors: typesColors,
+                              name: name,
+                            );
                           },
                         ),
                       ),

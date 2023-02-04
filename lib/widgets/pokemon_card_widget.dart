@@ -8,11 +8,13 @@ class PokemonCardWidget extends StatelessWidget {
       required this.index,
       required this.results,
       required this.pokemonDetails,
-      required this.typesColors});
+      required this.typesColors,
+      required this.name});
   final int index;
   final dynamic results;
   final Future<Map<String, dynamic>> pokemonDetails;
   final List<Map<String, dynamic>> typesColors;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class PokemonCardWidget extends StatelessWidget {
             builder: (context) => PokemonDetails(
               pokemonDetails: pokemonDetails,
               typesColors: typesColors,
+              name: name,
             ),
           ),
         );
@@ -85,9 +88,13 @@ class PokemonCardWidget extends StatelessWidget {
                   height: 120,
                 ),
               ),
-              PokemonTypesWidget(
-                typesColors: typesColors,
-                pokemonDetails: pokemonDetails,
+              Positioned(
+                bottom: 10,
+                left: 20,
+                child: PokemonTypesWidget(
+                  typesColors: typesColors,
+                  pokemonDetails: pokemonDetails,
+                ),
               ),
             ],
           ),
