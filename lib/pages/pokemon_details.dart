@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/repository/pokemon_repository.dart';
 import 'package:pokedex/widgets/pokemon_about_widget.dart';
 import 'package:pokedex/widgets/pokemon_evolution_widget.dart';
+import 'package:pokedex/widgets/pokemon_stats_widget.dart';
 import 'package:pokedex/widgets/pokemon_types_widget.dart';
 
 class PokemonDetails extends StatefulWidget {
@@ -160,7 +161,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
                                     text: 'About',
                                   ),
                                   Tab(
-                                    text: 'Status',
+                                    text: 'Stats',
                                   ),
                                   Tab(
                                     text: 'Evolution',
@@ -187,8 +188,9 @@ class _PokemonDetailsState extends State<PokemonDetails>
                                         futureBuilderTrainingData:
                                             futureBuilderTrainingData,
                                       ),
-                                      Center(
-                                        child: Text("It's rainy here"),
+                                      PokemonStatsWidget(
+                                        futureBuilderPokemonDetails:
+                                            futureBuilderPokemonDetails,
                                       ),
                                       PokemonEvolutionWidget(
                                         futureBuilderTrainingData:
