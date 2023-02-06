@@ -3,7 +3,7 @@ import 'package:pokedex/widgets/pokemon_about_item_widget.dart';
 
 class PokemonStatsWidget extends StatefulWidget {
   PokemonStatsWidget({super.key, required this.futureBuilderPokemonDetails});
-  final AsyncSnapshot<Map<String, dynamic>> futureBuilderPokemonDetails;
+  final AsyncSnapshot<Map<String, dynamic>?> futureBuilderPokemonDetails;
 
   @override
   State<PokemonStatsWidget> createState() => _PokemonStatsWidgetState();

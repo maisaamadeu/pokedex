@@ -30,7 +30,8 @@ class PokemonRepository {
     }
   }
 
-  Future<Map<String, dynamic>> getPokemonDetails({required String name}) async {
+  Future<Map<String, dynamic>?> getPokemonDetails(
+      {required String name}) async {
     var url = Uri.https('pokeapi.co', 'api/v2/pokemon/$name');
     var response = await http.get(url);
 
@@ -38,7 +39,7 @@ class PokemonRepository {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       return jsonResponse;
     } else {
-      throw ('ERRO');
+      return null;
     }
   }
 

@@ -12,7 +12,7 @@ class PokemonCardWidget extends StatelessWidget {
       required this.name});
   final int index;
   final dynamic results;
-  final Future<Map<String, dynamic>> pokemonDetails;
+  final Future<Map<String, dynamic>?> pokemonDetails;
   final List<Map<String, dynamic>> typesColors;
   final String name;
 

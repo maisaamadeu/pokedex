@@ -11,7 +11,7 @@ class PokemonDetails extends StatefulWidget {
       required this.pokemonDetails,
       required this.typesColors,
       required this.name});
-  final Future<Map<String, dynamic>> pokemonDetails;
+  final Future<Map<String, dynamic>?> pokemonDetails;
   final List<Map<String, dynamic>> typesColors;
   final String name;
 
@@ -54,7 +54,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
               if (futureBuilderPokemonDetails.hasError) {
                 return const Center(
                   child: Text(
-                    'Erro ao carregar os dados :D',
+                    'An error occurred while loading the data, please try again later. We apologize for the inconvenience.carregar os dados :D',
                     style: TextStyle(
                       fontSize: 25,
                     ),
@@ -75,7 +75,7 @@ class _PokemonDetailsState extends State<PokemonDetails>
                         if (futureBuilderTrainingData.hasError) {
                           return const Center(
                             child: Text(
-                              'Erro ao carregar os dados :D',
+                              'An error occurred while loading the data, please try again later. We apologize for the inconvenience.carregar os dados :D',
                               style: TextStyle(
                                 fontSize: 25,
                               ),

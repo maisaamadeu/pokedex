@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pokedex/pages/results_search_page.dart';
 import 'package:pokedex/repository/pokemon_repository.dart';
 import 'package:pokedex/widgets/pokemon_card_widget.dart';
 
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                 if (snapshot.hasError) {
                   return const Center(
                     child: Text(
-                      'Erro ao carregar os dados :D',
+                      'An error occurred while loading the data, please try again later. We apologize for the inconvenience.carregar os dados :D',
                       style: TextStyle(
                         fontSize: 25,
                       ),
@@ -131,6 +132,19 @@ class _HomePageState extends State<HomePage> {
                         height: 20,
                       ),
                       TextField(
+                        onSubmitted: (value) {
+                          if (value != '') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResultsSearchPage(
+                                  nameOrId: value.toLowerCase(),
+                                  typesColors: typesColors,
+                                ),
+                              ),
+                            );
+                          }
+                        },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -154,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                           itemCount: results.length,
                           itemBuilder: (context, index) {
                             var name = results[index]['name'].toString();
-                            late Future<Map<String, dynamic>> pokemonDetails =
+                            late Future<Map<String, dynamic>?> pokemonDetails =
                                 PokemonRepository()
                                     .getPokemonDetails(name: name);
                             return PokemonCardWidget(

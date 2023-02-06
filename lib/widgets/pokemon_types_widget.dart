@@ -4,7 +4,7 @@ class PokemonTypesWidget extends StatelessWidget {
   const PokemonTypesWidget(
       {super.key, required this.typesColors, required this.pokemonDetails});
   final List<Map<String, dynamic>> typesColors;
-  final Future<Map<String, dynamic>> pokemonDetails;
+  final Future<Map<String, dynamic>?> pokemonDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class PokemonTypesWidget extends StatelessWidget {
           default:
             if (snapshot.hasError) {
               return Text(
-                'Erro ao carregar os tipos dest pokemon',
+                'An error occurred while loading the data, please try again later. We apologize for the inconvenience.carregar os tipos dest pokemon',
                 style: TextStyle(
                   fontSize: 16,
                 ),

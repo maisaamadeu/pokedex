@@ -8,7 +8,7 @@ class PokemonAbouWidget extends StatelessWidget {
       required this.weakness,
       required this.typesColors,
       required this.futureBuilderTrainingData});
-  final AsyncSnapshot<Map<String, dynamic>> futureBuilderPokemonDetails;
+  final AsyncSnapshot<Map<String, dynamic>?> futureBuilderPokemonDetails;
   final AsyncSnapshot<Map<String, dynamic>> futureBuilderTrainingData;
   final Future<List<String>> weakness;
   final List<Map<String, dynamic>> typesColors;
@@ -123,7 +123,7 @@ class PokemonAbouWidget extends StatelessWidget {
                   if (typesSnapshot.hasError) {
                     return const Center(
                       child: Text(
-                        'Erro ao carregar os dados :D',
+                        'An error occurred while loading the data, please try again later. We apologize for the inconvenience.carregar os dados :D',
                         style: TextStyle(
                           fontSize: 25,
                         ),
